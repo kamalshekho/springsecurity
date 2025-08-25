@@ -23,6 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 public class CustomUserDetailsService implements UserDetailsService {
 
     private final UserRepo userRepo;
+    private final static String ROLE_PREFIX = "ROLE_";
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -33,13 +34,14 @@ public class CustomUserDetailsService implements UserDetailsService {
         String passowrd = user.get().getPassword();
         log.info("passowrd {}", passowrd);
         String role = user.get().getRole();
-        log.info("role {}", role);
-
+        log.info("bevor perfix role {}", role);
+        role = ROLE_PREFIX + role;
+        log.info("withe perfix role {}", role);
         List<GrantedAuthority> roles = new ArrayList<>();
         roles.add(new SimpleGrantedAuthority(role));
         log.info("roles {}", roles);
 
 
-        return new CustomUserDetails(username, role, roles);
+        return new CustomUserDetails(username, passowrd, roles);
     }
 }
