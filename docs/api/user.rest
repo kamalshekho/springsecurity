@@ -1,4 +1,21 @@
 POST http://localhost:8080/api/users/create
 Content-Type: application/x-www-form-urlencoded
 
-username=user&password=102030&name=Kamal&role=USER
+username=admin&password=123&name=Kamal&role=ADMIN
+
+####
+POST http://localhost:8080/api/users/create
+Content-Type: application/x-www-form-urlencoded
+
+username=user&password=123&name=test&role=USER
+
+####
+
+POST http://localhost:8080/api/users/login?username=user&password=123
+
+####
+
+GET http://localhost:8080/note
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJTdGlja3lub3RlcyIsInN1YiI6ImFkbWluIiwiaWF0IjoxNzU2MjEyNTI2LCJleHAiOjE3NTYyMTYxMjYsInVzZXJuYW1lIjoiYWRtaW4iLCJhdXRob3JpdGllcyI6WyJST0xFX0FETUlOIl19.4F_gWLOt-UCNH4WLIfIPc6sm-4sBPYXxAVXHjB05rhE
+
+
