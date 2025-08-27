@@ -36,8 +36,17 @@ public class UserService {
 
      public String loginAndGetToken(String username, String password) {
         try {
+            // 1. Baue ein Authentication-Objekt mit Username + Password (noch nicht geprüft!)
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, password);
+            // 2. authenticationManager.authenticate(...) startet den Prüfprozess:
+            //    - Intern: Ruft UserDetailsService.loadUserByUsername(username) auf → DB-User laden
+            //    - Der Provider: Vergleicht eingegebenes Passwort mit DB-Passwort (via PasswordEncoder)
+            //    - Bei Erfolg: gibt ein vollwertiges Authentication-Objekt zurück (inkl. Rollen)
+
             Authentication authentication = authenticationManager.authenticate(authenticationToken);
+            // Intern:  UserDetails userDetails = userDetailsService.loadUserByUsername("usernmae");
+            // dann povider nimmt den passowert dem User und das von DB gehascht, dann über PasswordEncoder verglichen
+            // dann wird das Authentication authentication = authenticationManager.authenticate(authenticationToken); 
             return tokenProvider.createToken(authentication);
         } catch (AuthenticationException e) {
             e.printStackTrace();

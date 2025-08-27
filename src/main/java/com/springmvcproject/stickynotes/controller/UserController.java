@@ -1,17 +1,13 @@
 package com.springmvcproject.stickynotes.controller;
 
-import java.util.Map;
-
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.springmvcproject.stickynotes.config.TokenProvider;
 import com.springmvcproject.stickynotes.service.impl.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -22,8 +18,6 @@ import lombok.RequiredArgsConstructor;
 public class UserController {
 
     private final UserService userService;
-      private final AuthenticationManager authenticationManager;
-    private final TokenProvider tokenProvider;
 
 
     @PostMapping("/create")
@@ -39,16 +33,11 @@ public class UserController {
         }
     }
 
-  @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestParam String username, @RequestParam String password) {
-        Authentication authentication = authenticationManager.authenticate(
-            new UsernamePasswordAuthenticationToken(username, password)
-        );
-
-        String token = tokenProvider.createToken(authentication);
-
-        return ResponseEntity.ok(Map.of("id_token", token));
-    }
+    @PostMapping("/login")
+        public ResponseEntity<IdToken> authenticate(@RequestParam String username, @RequestParam String password) {
+            String token = userService.loginAndGetToken(username, password);
+            return new ResponseEntity<>(new IdToken(token), HttpStatus.OK);
+        }
 }
 
 class IdToken {

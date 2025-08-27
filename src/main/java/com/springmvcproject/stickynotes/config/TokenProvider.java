@@ -62,15 +62,15 @@ public class TokenProvider {
             return false;
         }
     }
-
-    private SecretKey getSecretKey() {
-        return Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
-    }
-
+    
     private Claims parseClaimsFromToken(String token) {
         return Jwts.parser()
                 .verifyWith(getSecretKey())
                 .build().parseSignedClaims(token).getPayload();
+    }
+
+    private SecretKey getSecretKey() {
+        return Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
     }
 
 }
