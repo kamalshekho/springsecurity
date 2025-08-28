@@ -104,7 +104,14 @@
             <scope>runtime</scope>
         </dependency>
         <!-- ./ JWT - Token -->
-      
+
+        <!-- oauth2 -->
+        <dependency>
+            <groupId>org.springframework.security.oauth</groupId>
+            <artifactId>spring-security-oauth2</artifactId>
+            <version>2.5.2.RELEASE</version>
+        </dependency>
+        <!-- oauth2 -->
 
     </dependencies>
 
