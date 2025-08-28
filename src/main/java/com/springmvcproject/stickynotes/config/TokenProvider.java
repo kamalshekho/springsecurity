@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Service
+// @Service
 public class TokenProvider {
 
     @Value("${security.jwt.secret-key}")

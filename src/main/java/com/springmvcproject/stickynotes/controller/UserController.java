@@ -12,7 +12,7 @@ import com.springmvcproject.stickynotes.service.impl.UserService;
 
 import lombok.RequiredArgsConstructor;
 
-@RestController
+// @RestController
 @RequestMapping("/api/users")
 @RequiredArgsConstructor
 public class UserController {

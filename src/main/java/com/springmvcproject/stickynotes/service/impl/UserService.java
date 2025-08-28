@@ -13,7 +13,7 @@ import com.springmvcproject.stickynotes.repository.UserRepo;
 
 import lombok.RequiredArgsConstructor;
 
-@Service
+// @Service
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepo userRepo;
